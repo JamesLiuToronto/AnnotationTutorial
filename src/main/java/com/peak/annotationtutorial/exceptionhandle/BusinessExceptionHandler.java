@@ -1,12 +1,10 @@
-package com.peak.annotationtutorial.validation;
+package com.peak.annotationtutorial.exceptionhandle;
 
 import com.peak.annotationtutorial.locale.ErrorMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindException;
-import org.springframework.web.bind.MethodArgumentNotValidException;
-import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -17,23 +15,10 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestControllerAdvice
-public class ColorExceptionHandler {
+public class BusinessExceptionHandler {
 
     @Autowired
     ErrorMessage errorMessage ;
-
-    //@ExceptionHandler({MethodArgumentNotValidException.class, BlackColorException.class})
-    @ExceptionHandler
-    @ResponseBody
-    //public ResponseEntity<List> processUnmergeException(final MethodArgumentNotValidException ex) {
-    public ResponseEntity<List> processUnmergeException(final BindException ex){
-
-    List list = ex.getBindingResult().getAllErrors().stream()
-                .map(fieldError -> ErrorMessage.toLocale(fieldError.getDefaultMessage()))
-                .collect(Collectors.toList());
-
-        return new ResponseEntity<>(list, HttpStatus.BAD_REQUEST);
-    }
 
     @ExceptionHandler({RuntimeException.class})
     @ResponseBody
@@ -41,7 +26,7 @@ public class ColorExceptionHandler {
     public ResponseEntity<List> customerException(final RuntimeException ex){
 
         String error = ErrorMessage.toLocale(ex.getMessage()) ;
-        return new ResponseEntity<>((new ArrayList<String>(Arrays.asList(error))), HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>((new ArrayList<String>(Arrays.asList(error))), HttpStatus.BAD_REQUEST);
     }
 
 }
