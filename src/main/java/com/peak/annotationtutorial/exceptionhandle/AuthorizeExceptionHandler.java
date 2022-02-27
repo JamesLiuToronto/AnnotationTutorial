@@ -28,6 +28,7 @@ public class AuthorizeExceptionHandler {
     public ResponseEntity<List> processUnmergeException(final AuthorizeException ex){
 
         String error = ErrorMessage.toLocale(ex.getMessage()) ;
+        ex.printStackTrace() ;
         return new ResponseEntity<>((new ArrayList<String>(Arrays.asList(error))), HttpStatus.UNAUTHORIZED);
     }
 

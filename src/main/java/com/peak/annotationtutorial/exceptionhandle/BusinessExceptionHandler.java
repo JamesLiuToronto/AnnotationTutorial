@@ -1,6 +1,7 @@
 package com.peak.annotationtutorial.exceptionhandle;
 
 import com.peak.annotationtutorial.locale.ErrorMessage;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -26,6 +27,7 @@ public class BusinessExceptionHandler {
     public ResponseEntity<List> customerException(final RuntimeException ex){
 
         String error = ErrorMessage.toLocale(ex.getMessage()) ;
+        ex.printStackTrace() ;
         return new ResponseEntity<>((new ArrayList<String>(Arrays.asList(error))), HttpStatus.BAD_REQUEST);
     }
 
