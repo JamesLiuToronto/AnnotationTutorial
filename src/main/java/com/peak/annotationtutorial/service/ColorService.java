@@ -1,4 +1,4 @@
-package com.peak.annotationtutorial.controller;
+package com.peak.annotationtutorial.service;
 
 import com.peak.annotationtutorial.aoplog.LogMethodData;
 import com.peak.annotationtutorial.validation.BlackColorException;

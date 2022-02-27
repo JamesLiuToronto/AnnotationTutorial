@@ -28,7 +28,7 @@ public class RestLogger {
     @SneakyThrows
     public Object logArroundExec(ProceedingJoinPoint pjp) {
         List<String> list = LogUtility.constructLogMsg(pjp) ;
-        log.info("rest before {}", list.get(0), list.get(1));
+        log.info("rest before {} with input {}", list.get(0), list.get(1));
         long start = System.currentTimeMillis();
         var proceed = pjp.proceed();
         long end = System.currentTimeMillis();
