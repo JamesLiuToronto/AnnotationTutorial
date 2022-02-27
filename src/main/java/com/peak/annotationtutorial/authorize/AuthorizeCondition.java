@@ -1,15 +1,14 @@
-package com.peak.annotationtutorial.aoplog;
+package com.peak.annotationtutorial.authorize;
 
 import org.springframework.context.annotation.Condition;
 import org.springframework.context.annotation.ConditionContext;
 import org.springframework.core.type.AnnotatedTypeMetadata;
 
-public class  LoggingCondition implements Condition {
-
+public class  AuthorizeCondition implements Condition {
 
     @Override
     public boolean matches(ConditionContext context, AnnotatedTypeMetadata metadata) {
-        String logEnabled = context.getEnvironment().getProperty("application.logging.enable");
-        return Boolean.valueOf(logEnabled);
+        String tokenCheckingEnabled = context.getEnvironment().getProperty("application.security.enableTokenCheck");
+        return Boolean.valueOf(tokenCheckingEnabled);
     }
 }
