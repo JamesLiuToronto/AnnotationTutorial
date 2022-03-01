@@ -11,7 +11,7 @@ import java.util.stream.Collectors;
 
 public class LogUtility {
     public static List<String> constructLogMsg(JoinPoint jp) {
-        var args = Arrays.asList(jp.getArgs()).stream().map(String::valueOf).collect(Collectors.joining(",", "[", "]"));
+        String args = Arrays.asList(jp.getArgs()).stream().map(String::valueOf).collect(Collectors.joining(",", "[", "]"));
         Method method = ((MethodSignature) jp.getSignature()).getMethod();
         List<String> list = new ArrayList<>() ;
         list.add(method.getName());

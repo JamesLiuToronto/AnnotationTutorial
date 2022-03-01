@@ -7,7 +7,6 @@ import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.context.annotation.Conditional;
 import org.springframework.stereotype.Component;
 
-import javax.servlet.http.HttpServletRequest;
 import java.util.Arrays;
 
 @Aspect

@@ -8,7 +8,7 @@ public class  AuthorizeCondition implements Condition {
 
     @Override
     public boolean matches(ConditionContext context, AnnotatedTypeMetadata metadata) {
-        String tokenCheckingEnabled = context.getEnvironment().getProperty("application.security.enableTokenCheck");
+        String tokenCheckingEnabled = context.getEnvironment().getProperty("peak.security.token.enableTokenCheck");
         return Boolean.valueOf(tokenCheckingEnabled);
     }
 }

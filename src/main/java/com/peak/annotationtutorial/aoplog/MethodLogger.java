@@ -2,19 +2,14 @@ package com.peak.annotationtutorial.aoplog;
 
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
-import org.aspectj.lang.JoinPoint;
+
 import org.aspectj.lang.ProceedingJoinPoint;
-import org.aspectj.lang.annotation.AfterThrowing;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
-import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.context.annotation.Conditional;
 import org.springframework.stereotype.Component;
 
-import java.lang.reflect.Method;
-import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 
 
 @Aspect
@@ -30,7 +25,7 @@ public class MethodLogger {
         log.info("method {} request Parameter {}", list.get(0), list.get(1));
         //log.info("method before {}", constructLogMsg(pjp));
         long start = System.currentTimeMillis();
-        var proceed = pjp.proceed();
+        Object proceed = pjp.proceed();
         long end = System.currentTimeMillis();
         log.info("method {} response ({} ms) with result: {}", list.get(0), (end-start),  proceed.toString());
         return proceed;

@@ -1,9 +1,6 @@
 package com.peak.annotationtutorial.aoplog;
 
-import java.lang.reflect.Method;
-import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.JoinPoint;
@@ -30,7 +27,7 @@ public class RestLogger {
         List<String> list = LogUtility.constructLogMsg(pjp) ;
         log.info("rest before {} with input {}", list.get(0), list.get(1));
         long start = System.currentTimeMillis();
-        var proceed = pjp.proceed();
+        Object proceed = pjp.proceed();
         long end = System.currentTimeMillis();
         log.info("rest after {} with ({}) result: {}", list.get(0), (end-start), proceed.toString());
         return proceed;
