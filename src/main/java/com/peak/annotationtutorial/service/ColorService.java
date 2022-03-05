@@ -1,13 +1,9 @@
 package com.peak.annotationtutorial.service;
 
-import com.peak.annotationtutorial.aoplog.LogMethodData;
 import com.peak.annotationtutorial.validation.BlackColorException;
 import com.peak.annotationtutorial.validation.Color;
+import org.peak.common.mylog.LogMethodData;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestHeader;
-
-import javax.validation.Valid;
 
 @Service
 public class ColorService {

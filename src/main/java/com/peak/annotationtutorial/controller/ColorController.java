@@ -1,9 +1,9 @@
 package com.peak.annotationtutorial.controller;
 
-import com.peak.annotationtutorial.authorize.AuthorizeUser;
 import com.peak.annotationtutorial.service.ColorService;
 import com.peak.annotationtutorial.validation.Color;
 import lombok.extern.slf4j.Slf4j;
+import org.peak.common.token.AuthorizeUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
