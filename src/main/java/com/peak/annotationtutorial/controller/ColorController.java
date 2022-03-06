@@ -1,5 +1,6 @@
 package com.peak.annotationtutorial.controller;
 
+import com.peak.annotationtutorial.concurrent.ConcurrentRunner;
 import com.peak.annotationtutorial.service.ColorService;
 import com.peak.annotationtutorial.validation.Color;
 import lombok.extern.slf4j.Slf4j;
@@ -15,11 +16,19 @@ public class ColorController {
 
     @Autowired
     ColorService service ;
+    @Autowired
+    ConcurrentRunner runner;
 
     @GetMapping("/color")
     @AuthorizeUser
     public Color getColorCode(@RequestHeader("access_token") String access_token,
                               @Valid @RequestBody Color color) {
         return service.getColorCode(color) ;
+    }
+
+    @GetMapping("/total")
+    @AuthorizeUser
+    public Integer getTotal(@RequestHeader("access_token") String access_token) {
+        return runner.calculate();
     }
 }
