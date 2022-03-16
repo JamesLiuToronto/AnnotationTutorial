@@ -1,7 +1,9 @@
 package com.peak.annotationtutorial.config;
 
 import java.util.Locale;
+import java.util.concurrent.TimeUnit;
 
+import com.github.benmanes.caffeine.cache.Caffeine;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -13,6 +15,11 @@ import org.springframework.web.servlet.i18n.AcceptHeaderLocaleResolver;
 @Configuration
 @ComponentScan(basePackages = "com.peak.annotationtutorial")
 public class MvcConfig implements WebMvcConfigurer {
+
+    @Bean
+    public Caffeine caffeineConfig() {
+        return Caffeine.newBuilder().expireAfterWrite(2, TimeUnit.MINUTES);
+    }
 
     /*
     @Value("${application.translation.properties.defaultLocale}")

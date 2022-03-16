@@ -19,11 +19,18 @@ public class ColorController {
     @Autowired
     ConcurrentRunner runner;
 
+    @PostMapping("/color")
+    @AuthorizeUser
+    public Color postColorCode(@RequestHeader("access_token") String access_token,
+                              @Valid @RequestBody Color color) {
+        return service.getColorCode(color) ;
+    }
+
     @GetMapping("/color")
     @AuthorizeUser
     public Color getColorCode(@RequestHeader("access_token") String access_token,
-                              @Valid @RequestBody Color color) {
-        return service.getColorCode(color) ;
+                              @RequestParam("name") String name) {
+        return service.getColorByName(name) ;
     }
 
     @GetMapping("/total")

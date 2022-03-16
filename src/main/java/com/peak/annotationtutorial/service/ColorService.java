@@ -2,26 +2,49 @@ package com.peak.annotationtutorial.service;
 
 import com.peak.annotationtutorial.validation.BlackColorException;
 import com.peak.annotationtutorial.validation.Color;
+import lombok.extern.slf4j.Slf4j;
 import org.peak.common.mylog.LogMethodData;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
+@Slf4j
 @Service
 public class ColorService {
 
     @LogMethodData
+
     public Color getColorCode(Color color) {
 
         if (color.getColorName().equalsIgnoreCase("BLACK"))
             throw new BlackColorException("BLACK") ;
-        Color colorObj = new Color();
-        colorObj.setColorName(color.getColorName());
+        String code = null ;
+
         if (color.getColorName().equals("RED")) {
-            colorObj.setCode("R100");
+            code ="R100";
         } else if (color.getColorName().equals("GREEN")) {
-            colorObj.setCode("G200");
+            code ="G200";
         } else {
-            colorObj.setCode("B300");
+            code ="B300";
         }
-        return colorObj;
+        return Color.builder()
+                .colorName(color.getColorName())
+                .age(color.getAge())
+                .email(color.getEmail())
+                .code(code)
+                .ipAddress(color.getIpAddress())
+                .build();
+    }
+
+    @Cacheable(cacheNames = "color")
+    public Color getColorByName(String name){
+        log.info("retrieve");
+        return Color.builder()
+                .colorName(name)
+                .age(100)
+                .email("jaliu@chubb.com")
+                .code("100GE")
+                .ipAddress("192.168.100.1")
+                .build();
+
     }
 }
